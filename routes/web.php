@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// index - show all
+// show - show single
+// create - show form to create
+// store - store the new object
+// edit - show form to edit
+// update - update the edited object
+// delete - delete the object
+
+Route::get('/', [BookController::class, 'index']);
+
+Route::get('/book/{book}', [BookController::class, 'show']);
