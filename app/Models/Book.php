@@ -10,7 +10,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $table = 'book';
+    protected $table = 'books';
     protected $primaryKey = 'id';
     // protected $fillable = [
     //     'title',
@@ -21,5 +21,5 @@ class Book extends Model
     //     'page_count',
     //     'remaining_count',
     // ];
-    protected $timestamp = true;
+    public $timestamps = false;
 }
