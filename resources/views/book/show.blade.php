@@ -6,41 +6,28 @@
             <div class="flex">
                 <img class="hidden w-48 h-full mr-12 md:block rounded-lg"
                     src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
-                {{-- <div class="flow">
+                <div class="flex divide-x-2">
                     <div class="flex-1">
-                        <button class="bg-secondary rounded-lg px-4 py-2 mr-40" style="float: right">Захиалах</button>
-                        <h3 class="text-2xl mb-2 w-max-fit">
+                        <p class="text-2xl mb-4 w-max-fit font-bold">
                             {{ $book->title }}
-                        </h3>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-3xl font-bold mb-4">Book Description</h3>
-                        <div class="text-lg space-y-6">
-                            {{ $book->description }}
+                        </p>
+                        <hr>
+                        <div class="pt-8 pr-8 w-[600px]">
+                            <p class="text-xl font-bold mb-1 pl-4">Номын тайлбар</p>
+                            <div class="text-md space-y-6">
+                                {{ $book->description }}
+                            </div>
                         </div>
                     </div>
-                </div> --}}
-                <div class="grid grid-cols-3 gap-4 w-full divide-y-2">
-                    <div class="col-span-2">
-                        <h1 class="text-3xl mb-2">
-                            {{ $book->title }}
-                        </h1>
-                    </div>
-                    <div class="col-span-1">
-                        <button class="bg-secondary rounded-lg px-4 py-2 mr-40" style="float: right">Захиалах</button>
-                    </div>
-
-                    <div class="col-span-2 pt-8 pr-8">
-                        <h3 class="text-3xl font-bold mb-4">Book Description</h3>
-                        <div class="text-lg space-y-6">
-                            {{ $book->description }}
+                    <div class="flex-2">
+                        <div class="pl-8">
+                            <button class="bg-primary rounded-lg px-4 py-2 text-white"
+                                @if ($book->remaining_count == 0 || !$book->can_purchase) @disabled(true) @endif>Захиалах</button>
                         </div>
-                    </div>
-                    <div class="mt-16">
-                        <table class="border-separate border-spacing-2">
+                        <table class="border-separate border-spacing-2 mt-8">
                             <tr>
                                 <td>
-                                    Зохиолч:
+                                    <i class="fa-solid fa-pen-nib pr-2"></i> Зохиолч:
                                 </td>
                                 <td class="font-bold">
                                     {{ $book->author }}
@@ -48,7 +35,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Хэвлэгдсэн огноо:
+                                    <i class="fa-regular fa-calendar pr-2"></i> Хэвлэгдсэн огноо:
                                 </td>
                                 <td class="font-bold">
                                     {{ $book->published_date }}
@@ -56,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Хуудасны тоо:
+                                    <i class="fa-regular fa-file pr-2"></i> Хуудасны тоо:
                                 </td>
                                 <td class="font-bold">
                                     {{ $book->page_count }}
@@ -64,32 +51,25 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Үлдэгдэл:
+                                    <i class="fa-solid fa-check pr-2" style="color: green;"></i> Үлдэгдэл:
                                 </td>
                                 <td class="font-bold">
-                                    @if ($book->page_count > 0)
-                                        байна
+                                    @if ($book->remaining_count > 0)
+                                        <span style="color: green">Байгаа</span>
                                     @else
-                                        дууссан
+                                        <span style="color:red">Дууссан</span>
                                     @endif
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa-regular fa-star pr-2" style="color: #ffd500;"></i> Үнэлгээ:
+                                </td>
+                                <td class="font-bold">
 
+                                </td>
+                            </tr>
                         </table>
-                        {{-- <ul>
-                            <li>
-                                Зохиолч: <div class="font-bold"> {{ $book->author }} </div>
-                            </li>
-                            <li>
-                                Зохиолч: <div class="font-bold"> {{ $book->author }} </div>
-                            </li>
-                            <li>
-                                Зохиолч: <div class="font-bold"> {{ $book->author }} </div>
-                            </li>
-                            <li>
-                                Зохиолч: <div class="font-bold"> {{ $book->author }} </div>
-                            </li>
-                        </ul> --}}
                     </div>
                 </div>
             </div>
