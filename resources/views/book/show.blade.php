@@ -26,6 +26,9 @@
                             {{ $book->title }}
                         </h1>
                     </div>
+                    <div class="col-span-1">
+                        <button class="bg-secondary rounded-lg px-4 py-2 mr-40" style="float: right">Захиалах</button>
+                    </div>
 
                     <div class="col-span-2 pt-8 pr-8">
                         <h3 class="text-3xl font-bold mb-4">Book Description</h3>
