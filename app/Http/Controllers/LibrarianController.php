@@ -16,7 +16,7 @@ class LibrarianController extends Controller
        $userIds = $result->pluck('user_id')->toArray();
 
        // Retrieve books and users using the retrieved IDs
-       $books = DB::table('books')->whereIn('id', $bookIds)->get();
+       $books = DB::table('book')->whereIn('id', $bookIds)->get();
        $users = DB::table('user')->whereIn('id', $userIds)->get();
 
        // You can now associate books and users with each result
