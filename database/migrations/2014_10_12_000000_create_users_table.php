@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('address')->nullable();
             $table->string('phone_no')->unique()->nullable();
-            $table->integer('role');
-            $table->integer('balance');
-            $table->integer('is_valid');
+            $table->integer('role')->default(0);
+            $table->integer('balance')->default(50000);
+            $table->integer('is_valid')->default(0);
             $table->timestamp('validated_at')->nullable();
             $table->timestamp('created_at')->nullable();
         });
