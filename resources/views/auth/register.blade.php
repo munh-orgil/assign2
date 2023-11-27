@@ -46,15 +46,21 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4"> Бүртгэлтэй юу?
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 pl-1"
-                href="{{ route('login') }}">
-                {{ __('Нэвтрэх') }}
-            </a>
 
-            <x-primary-button class="ms-4">
+        <div class="block mt-4 mx-16">
+            <x-primary-button class="flex w-full items-center justify-center">
                 {{ __('Бүртгүүлэх') }}
             </x-primary-button>
+        </div>
+        <div class="block mt-2 mx-16">
+            <x-secondary-button class="flex w-full items-center justify-center"
+                onclick="document.location.href='/login'">
+                Нэвтрэх
+            </x-secondary-button>
+            {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 pl-1"
+                href="{{ route('login') }}">
+                {{ __('Нэвтрэх') }}
+            </a> --}}
         </div>
     </form>
 </x-guest-layout>

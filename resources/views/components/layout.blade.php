@@ -55,12 +55,6 @@
                 src="{{ asset('assets/logo.png') }}" alt="" class="logo" />Номын сан</a>
         <ul class="flex space-x-6 mr-6 text-md items-center">
             @auth
-                <li>
-                    <span class="font-bold">
-                        {{ auth()->user()->first_name }}
-                    </span>
-                </li>
-
                 @if (auth()->user()->role > 0)
                     <?php
                     $options = [
@@ -94,24 +88,13 @@
                             </select>
                         </form>
                     </li>
-                @endif
 
-                <li>
-                    <form class="inline" method="POST" action="/logout">
-                        @csrf
-                        <button type="submit">
-                            <i class="fa fa-door-closed"></i> Гарах
-                        </button>
-                    </form>
-                </li>
-            @else
-                <li>
-                    <a href="/register" class="hover:text-gray-500"><i class="fa fa-user-plus"></i> Бүртгүүлэх </a>
-                </li>
-                <li>
-                    <a href="/login" class="hover:text-gray-500"><i class="fa fa-arrow-right-to-bracket"></i>
-                        Нэвтрэх</a>
-                </li>
+                    <li>
+                        <span class="font-bold">
+                            {{ auth()->user()->first_name }}
+                        </span>
+                    </li>
+                @endif
             @endauth
         </ul>
     </nav>
@@ -119,28 +102,32 @@
     <?php
     $sideBarItems = [[], [], []];
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[0], ['Миний номнууд', 'book/user', 'book-open', $loggedIn]);
-    array_push($sideBarItems[0], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
+    array_push($sideBarItems[0], ['Миний номнууд', '/book/user/' . auth()->user(), 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Тохиргоо', '/user/edit/', 'gear', $loggedIn]);
+    array_push($sideBarItems[0], ['Бүртгүүлэх', '/register', 'user-plus', !$loggedIn]);
+    array_push($sideBarItems[0], ['Нэвтрэх', '/login', 'arrow-right-to-bracket', !$loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[1], ['Хэрэглэгч', 'book/user', 'user', true]);
-    array_push($sideBarItems[1], ['Захиалга', 'user/edit', 'book', true]);
+    array_push($sideBarItems[1], ['Хэрэглэгч', 'user', 'user', true]);
+    array_push($sideBarItems[1], ['Захиалга', 'book/user', 'book', true]);
+    array_push($sideBarItems[1], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
     
     array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[2], ['Хэрэглэгч', 'book/user', 'user', true]);
+    array_push($sideBarItems[2], ['Хэрэглэгч', 'user', 'user', true]);
     array_push($sideBarItems[2], ['Ном', 'book', 'book', true]);
+    array_push($sideBarItems[2], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
     ?>
 
     <aside id="default-sidebar"
         class="fixed top-16 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0 border-r-2"
         aria-label="Sidebar">
         <div class="h-full px-4 py-4 overflow-y-auto bg-gray-50 light:bg-gray-800">
-            <ul class="space-y-2 font-lg">
+            <ul class="font-lg h-full flex flex-col">
                 @foreach ($sideBarItems[$selectedRole] as $item)
                     @if ($item[3])
                         <li>
                             <a href="{{ $item[1] }}"
-                                class="flex items-center p-2 rounded-lg hover:bg-onHover group">
+                                class="flex items-center p-2 rounded-lg hover:bg-onHover group pt-4">
                                 <i class="fa-solid fa-{{ $item[2] }} pr-2"></i>
                                 <span>
                                     {{ $item[0] }}
@@ -149,6 +136,16 @@
                         </li>
                     @endif
                 @endforeach
+                @auth
+                    <li class="mt-auto mb-14">
+                        <a href="/logout" class="flex items-center p-2 rounded-lg hover:bg-onHover group">
+                            <i class="fa-solid fa-arrow-right-from-bracket pr-2"></i>
+                            <span>
+                                Гарах
+                            </span>
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </aside>
