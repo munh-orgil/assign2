@@ -1,6 +1,6 @@
-@props(['results'])
+@props(['books'])
 
-<section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
+<section class="antialiased bg-gray-100 text-gray-600 h-screen px-4 mt-24">
     <div class="flex flex-col justify-center h-full">
         <!-- Table -->
         <div class="w-full max-w-8xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
@@ -48,42 +48,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($results as $result)
+                            @foreach ($books as $book)
                             <tr class="hover:bg-gray-100">
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="font-medium text-gray-800">{{$result->book->id}}</div>
+                                        <div class="font-medium text-gray-800">{{$book->title}}</div>
                                     </div>
                                 </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$result->book->title}}</div>
+                                <td class="p-2 break-all">
+                                    <textarea cols="30" rows="3" class="resize-none line-clamp-3" readonly>{{$book->description}}</textarea>
+                                    {{-- <div class="text-left">{{$book->description}}</div> --}}
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$result->book->first_name}} {{$result->user->last_name}}</div>
+                                    <div class="text-left font-medium">{{$book->author}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$result->user->phone_no}}</div>
+                                    <div class="text-left font-medium">{{$book->published_date}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$result->expire_at}}</div>
+                                    <div class="text-left font-medium">{{$book->remaining_count}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    {{-- <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-900 py-1 px-2 text-xs rounded-md" style="opacity: 1;">
-                                        <span class="">paid</span>
-                                    </div> --}}
-
-                                    <select class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-gray-200 text-slate-900 py-1 px-2 text-xs rounded-md" style="opacity: 1;">
-                                        <option class="relative grid items-center font-sans font-bold uppercase bg-slate-500 whitespace-nowrap select-none py-1 px-2 text-xs rounded-md" style="opacity: 1;" id="">Аваагүй</option>
-                                        <option class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none py-1 px-2 text-xs rounded-md" style="opacity: 1;">Хүлээж авсан</option>
-                                        <option class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none py-1 px-2 text-xs rounded-md" style="opacity: 1;">Буцааж өгсөн</option>
-                                        <option class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none py-1 px-2 text-xs rounded-md" style="opacity: 1;">Хоцорсон</option>
-                                    </select>
+                                    <div class="text-left font-medium">{{$book->created_at}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left font-medium">{{$book->created_by}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left font-medium">{{$book->updated_at}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left font-medium">{{$book->updated_by}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-lg text-center">
                                         <button class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button" >
                                         <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                                            <i class="fa-solid fa-clock-rotate-left"></i>
+                                            <i class="fa-solid fa-pencil"></i>
+                                        </span>
+                                      </button>
+                                    </div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-lg text-center">
+                                        <button class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button" >
+                                        <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                                            <i class="fa-solid fa-trash"></i>
                                         </span>
                                       </button>
                                       

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,8 @@ Route::get('/', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show']);
 
 Route::get('/librarian', [LibrarianController::class, 'index']);
+Route::get('/manager', [ManagerController::class, 'index']);
+Route::get('/manager/create', [ManagerController::class, 'create']);
+Route::post('/manager/store', [ManagerController::class, 'store']);
 
 require __DIR__ . '/auth.php';
