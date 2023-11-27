@@ -16,7 +16,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         if (Auth::check()) {
-            $bookUser = BookUser::where("user_id", auth()->id)->where("book_id", $book->id)->first();
+            $bookUser = BookUser::where("user_id", auth()->user()->id)->where("book_id", $book->id)->first();
             if ($bookUser == null) {
                 $book['can_purchase'] = true;
             } else {

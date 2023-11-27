@@ -18,13 +18,17 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(10),
-            'author' => 'Мөнх-Оргил',
-            'picture' => NULL,
-            'published_date' => $this->faker->date(),
-            'page_count' => $this->faker->numberBetween(100, 300),
-            'remaining_count' => $this->faker->numberBetween(0, 100),
+            'title' => fake()->words(2, true),
+            'description' => fake()->paragraph(4),
+            'author' => fake()->firstName(),
+            'picture' => null,
+            'published_date' => fake()->date(),
+            'page_count' => fake()->numberBetween(100, 300),
+            'remaining_count' => fake()->numberBetween(0, 40),
+            'created_at' => now()->format('Y-m-d H:i:s'),
+            'created_by' => fake()->numberBetween(1, 10),
+            'updated_at' => now()->format('Y-m-d H:i:s'),
+            'updated_by' => fake()->optional()->numberBetween(1, 10),
         ];
     }
 }

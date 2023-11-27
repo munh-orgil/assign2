@@ -19,7 +19,6 @@ class User extends Authenticatable
         'balance' => 50000,
     ];
     protected $fillable = [
-        'username',
         'email',
         'reg_no',
         'last_name',

@@ -34,20 +34,30 @@
 
 
 @auth
-    {{ $loggedIn = true }}
+    <?php
+    $loggedIn = true;
+    if (isset($_GET['selectedRole'])) {
+        $selectedRole = $_GET['selectedRole'];
+    } else {
+        $selectedRole = auth()->user()->role;
+    }
+    ?>
 @else
-    {{ $loggedIn = false }}
+    <?php
+    $loggedIn = false;
+    $selectedRole = 0;
+    ?>
 @endauth
 
 <body class="text-[#303030] font-roboto">
     <nav class="fixed flex justify-between items-center h-16 border-b-2 z-30 w-full bg-white">
         <a class="flex items-center font-bold" href="/"><img class="w-12 ml-6"
                 src="{{ asset('assets/logo.png') }}" alt="" class="logo" />Номын сан</a>
-        <ul class="flex space-x-6 mr-6 text-md">
+        <ul class="flex space-x-6 mr-6 text-md items-center">
             @auth
                 <li>
                     <span class="font-bold">
-                        Сайн байна уу {{ auth()->user()->first_name }}?
+                        {{ auth()->user()->first_name }}
                     </span>
                 </li>
 
@@ -69,12 +79,16 @@
                     ];
                     ?>
                     <li>
-                        <form action="" method="POST">
+                        <form action="/" method="GET">
                             @csrf
-                            <select name="dropdown" id="dropdown" class="border-2 rounded-lg p-2">
+                            <select name="selectedRole" class="border-2 rounded-lg p-2" onchange="this.form.submit()">
                                 @foreach ($options as $item)
                                     @if ($item['value'] <= auth()->user()->role)
-                                        <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                                        <option value="{{ $item['value'] }}"
+                                            @if ($selectedRole == $item['value']) {
+                                            @selected(true)
+                                        } @endif>
+                                            {{ $item['label'] }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -103,11 +117,18 @@
     </nav>
 
     <?php
-    $sideBarItems = [];
-    array_push($sideBarItems, ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems, ['Хайх', 'search', 'magnifying-glass', true]);
-    array_push($sideBarItems, ['Миний номнууд', 'book/user', 'list-check', $loggedIn]);
-    array_push($sideBarItems, ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
+    $sideBarItems = [[], [], []];
+    array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
+    array_push($sideBarItems[0], ['Миний номнууд', 'book/user', 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
+    
+    array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
+    array_push($sideBarItems[1], ['Хэрэглэгч', 'book/user', 'user', true]);
+    array_push($sideBarItems[1], ['Захиалга', 'user/edit', 'book', true]);
+    
+    array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
+    array_push($sideBarItems[2], ['Хэрэглэгч', 'book/user', 'user', true]);
+    array_push($sideBarItems[2], ['Ном', 'book', 'book', true]);
     ?>
 
     <aside id="default-sidebar"
@@ -115,7 +136,7 @@
         aria-label="Sidebar">
         <div class="h-full px-4 py-4 overflow-y-auto bg-gray-50 light:bg-gray-800">
             <ul class="space-y-2 font-lg">
-                @foreach ($sideBarItems as $item)
+                @foreach ($sideBarItems[$selectedRole] as $item)
                     @if ($item[3])
                         <li>
                             <a href="{{ $item[1] }}"

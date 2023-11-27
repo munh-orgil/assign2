@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('book_id');
             $table->integer('status');
             $table->timestampTz('created_at')->nullable();
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestampTz('received_at')->nullable();
             $table->timestampTz('expire_at')->nullable();
         });

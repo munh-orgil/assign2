@@ -13,7 +13,7 @@
                         </p>
                         <hr>
                         <div class="pt-8 pr-8 w-[600px]">
-                            <p class="text-xl font-bold mb-1 pl-4">Номын тайлбар</p>
+                            <p class="text-xl font-bold mb-1 pb-2">Номын тайлбар</p>
                             <div class="text-md space-y-6">
                                 {{ $book->description }}
                             </div>
@@ -24,7 +24,7 @@
                             <button class="bg-primary rounded-lg px-4 py-2 text-white"
                                 @if ($book->remaining_count == 0 || !$book->can_purchase) @disabled(true) @endif>Захиалах</button>
                         </div>
-                        <table class="border-separate border-spacing-2 mt-8">
+                        <table class="border-separate border-spacing-2 mt-8 ml-2">
                             <tr>
                                 <td>
                                     <i class="fa-solid fa-pen-nib pr-2"></i> Зохиолч:
