@@ -17,9 +17,9 @@ class BookUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1,5),
-            'book_id' => $this->faker->numberBetween(1,5),
-            'status' => $this->faker->numberBetween(0,3),
+            'user_id' => $this->faker->numberBetween(1, 5),
+            'book_id' => $this->faker->numberBetween(1, 5),
+            'status' => $this->faker->numberBetween(0, 3),
             'created_at' => $this->faker->date(),
             'received_at' => $this->faker->date(),
             'expire_at' => $this->faker->date(),

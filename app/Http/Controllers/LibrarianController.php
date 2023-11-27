@@ -9,26 +9,32 @@ use Illuminate\Support\Facades\DB;
 class LibrarianController extends Controller
 {
 
-    public function index(){
-       $result = DB::table('book_user')->latest()->paginate(10);
+    public function index()
+    {
+        $bookUsers = DB::table('book_user')->latest()->paginate(10);
+        $bookIds = [];
+        $userIds = [];
 
-       $bookIds = $result->pluck('book_id')->toArray();
-       $userIds = $result->pluck('user_id')->toArray();
+        foreach ($bookUsers as $item) {
+            array_push($bookIds, $item->book_id);
+            array_push($userIds, $item->user_id);
+        }
 
-       // Retrieve books and users using the retrieved IDs
-       $books = DB::table('book')->whereIn('id', $bookIds)->get();
-       $users = DB::table('user')->whereIn('id', $userIds)->get();
+        $books = DB::table('book')->whereIn('id', $bookIds)->get();
+        $users = DB::table('user')->whereIn('id', $userIds)->get();
+        $result = [];
 
-       // You can now associate books and users with each result
-       foreach ($result as $key => $item) {
-           $book = $books->where('id', $item->book_id)->first();
-           $user = $users->where('id', $item->user_id)->first();
+        foreach ($bookUsers as $key => $item) {
+            $book = $books->where('id', $item->book_id)->first();
+            $user = $users->where('id', $item->user_id)->first();
 
-           $result[$key]->book = $book;
-           $result[$key]->user = $user;
-       }
+            if ($user != null && $book != null) {
+                $bookUsers[$key]->book = $book;
+                $bookUsers[$key]->user = $user;
+                $result[$key] = $bookUsers[$key];
+            }
+        }
 
-       // You can now pass the paginated results, books, and users to your view
-       return view('librarian.index', ['results' => $result]);
+        return view('librarian.index', ['results' => $result]);
     }
 }

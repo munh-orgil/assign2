@@ -132,7 +132,7 @@
         </div>
     </aside>
     <main>
-        <div {{ $attributes->merge(['class' => 'pt-4 absolute top-16 left-56 right-0 bottom-0 bg-neutral']) }}>
+        <div {{ $attributes->merge(['class' => 'pt-4 absolute top-16 left-56 right-0 h-max bg-neutral']) }}>
             {{ $slot }}
         </div>
     </main>

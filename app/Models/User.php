@@ -38,4 +38,5 @@ class User extends Authenticatable
         'validated_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public $timestamps = false;
 }
