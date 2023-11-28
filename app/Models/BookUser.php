@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class BookUser extends Model
 {
     use HasFactory;
-    protected $table="book_user";
+    protected $table = "book_user";
     public $timestamps = false;
+
+    public function scopeFilter($query, int $userId)
+    {
+        if ($userId ?? false) {
+            $query->where('user_id', '=', $userId);
+        }
+    }
 }

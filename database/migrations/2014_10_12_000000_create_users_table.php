@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('reg_no')->unique()->nullable();
             $table->string('last_name');
             $table->string('first_name');
+            $table->string('avatar');
             $table->string('address')->nullable();
             $table->string('phone_no')->unique()->nullable();
             $table->integer('role')->default(0);

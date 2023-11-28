@@ -21,7 +21,11 @@ class ManagerController extends Controller
 
     public function index()
     {
-        return view('manager.index', ['books' => Book::latest()->paginate(10)]);
+        if (auth()->user()->role > 1) {
+            return view('manager.index', ['books' => Book::latest()->paginate(10)]);
+        } else {
+            return redirect("/unauthorized");
+        }
     }
 
     public function create()
@@ -40,14 +44,14 @@ class ManagerController extends Controller
             'page_count' => ['required', 'int'],
             'remaining_count' => ['required', 'int'],
         ]);
-        
+
         $image = $request->file('picture');
 
         $nextId = DB::select("select AUTO_INCREMENT from information_schema.tables where table_name = 'book' AND table_schema = 'bookstore'");
         // dd($nextId);
         $nextIdStr = $nextId[0]->AUTO_INCREMENT;
 
-        $new_name = 'book'. $nextIdStr . '.' . $image->getClientOriginalExtension();
+        $new_name = 'book' . $nextIdStr . '.' . $image->getClientOriginalExtension();
         $image->move(storage_path('app/public/pictures'), $new_name);
 
         Book::create([
@@ -62,11 +66,12 @@ class ManagerController extends Controller
 
         return redirect('/manager/create')->with('message', "Ном бүртгэгдлээ");
     }
-    public function getBook(int $id){
-        return view('manager.edit',['book' => Book::where('id', '=', $id)]);
+    public function getBook(int $id)
+    {
+        return view('manager.edit', ['book' => Book::where('id', '=', $id)]);
     }
 
-    public function update(Request $request){
-
+    public function update(Request $request)
+    {
     }
 }

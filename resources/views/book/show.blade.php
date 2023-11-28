@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout class="min-h-full">
     <div class="mx-4">
         <x-card class="p-10 bg-white">
             <a href="/" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back

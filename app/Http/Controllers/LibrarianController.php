@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\resultsUser;
+use App\Models\Book;
+use App\Models\BookUser;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class LibrarianController extends Controller
 {
 
-    public function index()
+    public function index(User $user)
     {
-        $bookUsers = DB::table('book_user')->latest()->paginate(10);
+        $bookUsers = BookUser::latest();
+        if ($user != null && $user->id != 0) {
+            $bookUsers->filter($user->id);
+        }
+        $bookUsers = $bookUsers->paginate(10);
         $bookIds = [];
         $userIds = [];
 
@@ -20,8 +25,8 @@ class LibrarianController extends Controller
             array_push($userIds, $item->user_id);
         }
 
-        $books = DB::table('book')->whereIn('id', $bookIds)->get();
-        $users = DB::table('user')->whereIn('id', $userIds)->get();
+        $books = Book::whereIn('id', $bookIds)->get();
+        $users = User::whereIn('id', $userIds)->get();
         $result = [];
 
         foreach ($bookUsers as $key => $item) {

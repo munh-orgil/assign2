@@ -4,6 +4,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckLibrarian;
+use App\Http\Middleware\CheckManager;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,12 +39,17 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [BookController::class, 'index']);
-
 Route::get('/book/{book}', [BookController::class, 'show']);
+Route::get('/book/user/{user}', [LibrarianController::class, 'index']);
 
-Route::get('/librarian', [LibrarianController::class, 'index']);
-Route::get('/manager', [ManagerController::class, 'index']);
-Route::get('/manager/create', [ManagerController::class, 'create']);
-Route::post('/manager/store', [ManagerController::class, 'store']);
+Route::middleware(['auth', CheckLibrarian::class])->prefix("librarian")->group(function () {
+    Route::get('', [LibrarianController::class, 'index']);
+});
+
+Route::middleware(['auth', CheckManager::class])->prefix("manager")->group(function () {
+    Route::get('', [ManagerController::class, 'index']);
+    Route::get('/create', [ManagerController::class, 'create']);
+    Route::post('/store', [ManagerController::class, 'store']);
+});
 
 require __DIR__ . '/auth.php';

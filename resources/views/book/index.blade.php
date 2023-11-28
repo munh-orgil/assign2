@@ -5,12 +5,12 @@
                 <i class="fa fa-search text-primary z-20"></i>
             </div>
             <input type="text" name="search"
-                class="h-12 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
+                class="h-12 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none text-sm"
                 value="@isset($_GET['search']){{ $_GET['search'] }}@endisset"
-                placeholder="Номны нэр, тайлбар, эсвэл зохиогчоор хайх..." />
+                placeholder="Номын нэр, тайлбар, эсвэл зохиогчоор хайх..." />
             <div class="absolute top-1 right-1">
                 <button type="submit" class="h-10 w-20 text-white rounded-lg bg-primary hover:bg-secondary">
-                    Search
+                    Хайх
                 </button>
             </div>
         </div>
@@ -19,9 +19,12 @@
         {{ $books->links() }}
     </div>
 
-    <div class="lg:grid lg:grid-cols-2 gap-2 space-y-2 md:space-y-0 mx-4">
+    <div class="lg:grid lg:grid-cols-3 gap-2 space-y-2 md:space-y-0 mx-4">
         @foreach ($books as $book)
             <x-book :book="$book" />
         @endforeach
+    </div>
+    <div class="flex-2 mt-6 px-8 pb-2">
+        {{ $books->links() }}
     </div>
 </x-layout>

@@ -30,12 +30,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],
+            [
+                'last_name.required' => 'Овог оруулна уу',
+                'last_name.max' => 'Овог хэтэрхий урт байна',
+                'first_name.required' => 'Нэр оруулна уу',
+                'first_name.max' => 'Нэр хэтэрхий урт байна',
+                'email.required' => 'И-мэйл оруулна уу',
+                'email.unique' => 'И-мэйл бүртгэлтэй байна',
+                'email.max' => 'И-мэйл хэтэрхий урт байна',
+                'password.required' => 'Нууц үг оруулна уу',
+                'password.confirmed' => 'Давтсан нууц үг буруу байна',
+            ]
+        );
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -46,8 +59,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/login')->with("success", "Бүртгэл амжилттай үүслээ");
     }
 }

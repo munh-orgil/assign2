@@ -32,6 +32,7 @@ class User extends Authenticatable
     ];
     protected $hidden = [
         'password',
+        'selected_role'
     ];
     protected $casts = [
         'validated_at' => 'datetime',

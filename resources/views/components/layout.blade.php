@@ -36,10 +36,14 @@
 @auth
     <?php
     $loggedIn = true;
-    if (isset($_GET['selectedRole'])) {
-        $selectedRole = $_GET['selectedRole'];
+    if (isset($_GET['selected_role'])) {
+        $selectedRole = $_GET['selected_role'];
+        setcookie('selected_role', $selectedRole);
+    } elseif (isset($_COOKIE['selected_role'])) {
+        $selectedRole = $_COOKIE['selected_role'];
     } else {
         $selectedRole = auth()->user()->role;
+        setcookie('selected_role', $selectedRole);
     }
     ?>
 @else
@@ -75,7 +79,7 @@
                     <li>
                         <form action="/" method="GET">
                             @csrf
-                            <select name="selectedRole" class="border-2 rounded-lg p-2" onchange="this.form.submit()">
+                            <select name="selected_role" class="border-2 rounded-lg p-2" onchange="this.form.submit()">
                                 @foreach ($options as $item)
                                     @if ($item['value'] <= auth()->user()->role)
                                         <option value="{{ $item['value'] }}"
@@ -88,13 +92,17 @@
                             </select>
                         </form>
                     </li>
-
-                    <li>
+                @endif
+                <li>
+                    <div class="flex gap-2 items-center">
                         <span class="font-bold">
                             {{ auth()->user()->first_name }}
                         </span>
-                    </li>
-                @endif
+
+                        <img class="hidden w-10 md:block rounded-full border-2 border-solid border-gray-300"
+                            src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('/assets/no-avatar.jpg') }}" />
+                    </div>
+                </li>
             @endauth
         </ul>
     </nav>
@@ -102,14 +110,12 @@
     <?php
     $sideBarItems = [[], [], []];
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[0], ['Миний номнууд', '/book/user/' . auth()->user(), 'book-open', $loggedIn]);
-    array_push($sideBarItems[0], ['Тохиргоо', '/user/edit/', 'gear', $loggedIn]);
-    array_push($sideBarItems[0], ['Бүртгүүлэх', '/register', 'user-plus', !$loggedIn]);
-    array_push($sideBarItems[0], ['Нэвтрэх', '/login', 'arrow-right-to-bracket', !$loggedIn]);
+    array_push($sideBarItems[0], ['Миний номнууд', 'book/user/' . auth()->user()->id, 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Тохиргоо', 'user/edit/', 'gear', $loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
     array_push($sideBarItems[1], ['Хэрэглэгч', 'user', 'user', true]);
-    array_push($sideBarItems[1], ['Захиалга', 'book/user', 'book', true]);
+    array_push($sideBarItems[1], ['Захиалга', 'librarian', 'book', true]);
     array_push($sideBarItems[1], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
     
     array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
@@ -121,13 +127,14 @@
     <aside id="default-sidebar"
         class="fixed top-16 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0 border-r-2"
         aria-label="Sidebar">
-        <div class="h-full px-4 py-4 overflow-y-auto bg-gray-50 light:bg-gray-800">
-            <ul class="font-lg h-full flex flex-col">
+        <div class="h-full px-2 py-4 overflow-y-auto bg-gray-50 light:bg-gray-800">
+            <ul class="text-sm h-full flex flex-col gap-1">
                 @foreach ($sideBarItems[$selectedRole] as $item)
                     @if ($item[3])
-                        <li>
+                        <li class="px-2 rounded-lg">
                             <a href="{{ $item[1] }}"
-                                class="flex items-center p-2 rounded-lg hover:bg-onHover group pt-4">
+                                @if (Request::path() == $item[1]) class="flex items-center p-3 rounded-lg bg-primary text-white hover:bg-slate-700" @endif
+                                class="flex items-center p-3 hover:bg-onHover rounded-lg group">
                                 <i class="fa-solid fa-{{ $item[2] }} pr-2"></i>
                                 <span>
                                     {{ $item[0] }}
@@ -137,13 +144,30 @@
                     @endif
                 @endforeach
                 @auth
-                    <li class="mt-auto mb-14">
-                        <a href="/logout" class="flex items-center p-2 rounded-lg hover:bg-onHover group">
-                            <i class="fa-solid fa-arrow-right-from-bracket pr-2"></i>
+                    <li class="mt-auto mb-14 px-2">
+                        <a href="/logout" class="flex justify-center p-2 rounded-lg hover:bg-onHover group">
+                            <i class="fa-solid fa-arrow-right-from-bracket my-auto pr-2"></i>
                             <span>
                                 Гарах
                             </span>
                         </a>
+                    </li>
+                @else
+                    <li class="mt-auto mb-14">
+                        <div class="flex">
+                            <a href="/register" class="flex text-sm hover:bg-onHover group items-center p-2 rounded-lg">
+                                <i class="fa-solid fa-user-plus pr-2"></i>
+                                <span>
+                                    Бүртгүүлэх
+                                </span>
+                            </a>
+                            <a href="/login" class="flex text-sm hover:bg-onHover group items-center p-2 rounded-lg">
+                                <i class="fa-solid fa-right-to-bracket pr-2"></i>
+                                <span>
+                                    Нэвтрэх
+                                </span>
+                            </a>
+                        </div>
                     </li>
                 @endauth
             </ul>
@@ -155,7 +179,9 @@
         </div>
     </main>
 
-    <x-message />
+    <x-success />
+    <x-alert />
+    <x-warning />
 </body>
 
 </html>

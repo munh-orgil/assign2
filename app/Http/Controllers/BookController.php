@@ -11,7 +11,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        return view('book.index', ['books' => Book::latest()->filter(request(['search']))->paginate(10)]);
+        return view('book.index', ['books' => Book::latest()->filter(request(['search']))->paginate(45)]);
     }
     public function show(Book $book)
     {
