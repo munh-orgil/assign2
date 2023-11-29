@@ -19,10 +19,10 @@
         {{ $books->links() }}
     </div>
 
-    <div class="lg:grid lg:grid-cols-1 gap-2 space-y-2 md:space-y-0 mx-4">
+    <div class="lg:grid lg:grid-cols-3 gap-2 space-y-2 md:space-y-0 mx-4">
         @if (count($books) > 0)
             @foreach ($books as $book)
-                <x-book :book="$book" />
+                <x-my-book :book="$book" />
             @endforeach
         @else
             <x-card class="h-max w-full bg-white flex">

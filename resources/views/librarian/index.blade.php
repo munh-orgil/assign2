@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex-2 px-8 pb-2">
-        {{ $bookResults->links() }}
+        {{ $bookUsers->links() }}
     </div>
     <div class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
         <div class="flex flex-col justify-center h-full">

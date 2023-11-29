@@ -9,7 +9,7 @@
 
 <x-card class="hover:bg-onHover bg-white cursor-pointer" onclick="document.location.href='/book/' + {{ $book->id }}">
     <div class="flex h-48">
-        <img class="hidden w-32 mr-6 md:block rounded-sm"
+        <img class="hidden w-32 mr-6 md:block rounded-sm object-cover"
             src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
         <div class="flex-1 relative">
             <span class="text-xl font-bold line-clamp-1 py-2">

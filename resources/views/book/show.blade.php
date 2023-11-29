@@ -5,7 +5,7 @@
             </a>
             <div class="flex">
                 {{-- @dd($book->picture) --}}
-                <img class="hidden w-48 h-full mr-12 md:block rounded-lg"
+                <img class="hidden w-48 h-full mr-12 md:block rounded-lg object-cover"
                     src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
                 <div class="flex divide-x-2">
                     <div class="flex-1">
