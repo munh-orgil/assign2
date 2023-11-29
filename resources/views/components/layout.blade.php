@@ -109,8 +109,12 @@
 
     <?php
     $sideBarItems = [[], [], []];
+    $userId = '';
+    if (auth()->user() != null) {
+        $userId = auth()->user()->id;
+    }
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[0], ['Миний номнууд', 'book/user/' . auth()->user()->id, 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Миний номнууд', 'book/user/' . $userId, 'book-open', $loggedIn]);
     array_push($sideBarItems[0], ['Тохиргоо', 'user/edit/', 'gear', $loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
@@ -133,7 +137,7 @@
                     @if ($item[3])
                         <li class="px-2 rounded-lg">
                             <a href="{{ $item[1] }}"
-                                @if (Request::path() == $item[1]) class="flex items-center p-3 rounded-lg bg-primary text-white hover:bg-slate-700" @endif
+                                @if (Request::path() == $item[0]) class="flex items-center p-3 rounded-lg bg-primary text-white hover:bg-slate-700" @endif
                                 class="flex items-center p-3 hover:bg-onHover rounded-lg group">
                                 <i class="fa-solid fa-{{ $item[2] }} pr-2"></i>
                                 <span>
