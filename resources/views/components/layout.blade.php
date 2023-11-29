@@ -114,7 +114,7 @@ if (auth()->user() != null) {
         $userId = auth()->user()->id;
     }
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[0], ['Миний номнууд', '/book/user/' . $userId, 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Миний номнууд', '/my_books/' . $userId, 'book-open', $loggedIn]);
     array_push($sideBarItems[0], ['Тохиргоо', '/user/edit/', 'gear', $loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);

@@ -22,4 +22,8 @@ class Book extends Model
                 ->orWhere('author', 'like', '%' . request('search') . '%');
         }
     }
+    public function user()
+    {
+        return $this->belongsToMany(User::class, "book_user");
+    }
 }

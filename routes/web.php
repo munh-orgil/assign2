@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserBookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show']);
-Route::get('/book/user/{user}', [LibrarianController::class, 'index']);
+Route::middleware('auth')->get('/my_books/{user_id}', [UserBookController::class, 'myBooks']);
 
 Route::middleware(['auth', 'librarian'])->prefix("librarian")->group(function () {
     Route::get('', [LibrarianController::class, 'index']);
