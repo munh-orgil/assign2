@@ -33,8 +33,8 @@
 </head>
 
 
-@auth
-    <?php
+<?php
+if (auth()->user() != null) {
     $loggedIn = true;
     if (isset($_GET['selected_role'])) {
         $selectedRole = $_GET['selected_role'];
@@ -45,13 +45,11 @@
         $selectedRole = auth()->user()->role;
         setcookie('selected_role', $selectedRole);
     }
-    ?>
-@else
-    <?php
+} else {
     $loggedIn = false;
     $selectedRole = 0;
-    ?>
-@endauth
+}
+?>
 
 <body class="text-[#303030] font-roboto">
     <nav class="fixed flex justify-between items-center h-16 border-b-2 z-30 w-full bg-white">
@@ -93,15 +91,17 @@
                         </form>
                     </li>
                 @endif
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <span class="font-bold">
-                            {{ auth()->user()->first_name }}
-                        </span>
+                <li class="flex items-center p-2 hover:bg-onHover rounded-lg group">
+                    <a href="/profile">
+                        <div class="flex gap-2 items-center">
+                            <span class="font-bold">
+                                {{ auth()->user()->first_name }}
+                            </span>
 
-                        <img class="hidden w-10 md:block rounded-full border-2 border-solid border-gray-300"
-                            src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('/assets/no-avatar.jpg') }}" />
-                    </div>
+                            <img class="hidden w-10 md:block rounded-full border-2 border-solid border-gray-300"
+                                src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('/assets/no-avatar.jpg') }}" />
+                        </div>
+                    </a>
                 </li>
             @endauth
         </ul>
@@ -114,18 +114,18 @@
         $userId = auth()->user()->id;
     }
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[0], ['Миний номнууд', 'book/user/' . $userId, 'book-open', $loggedIn]);
-    array_push($sideBarItems[0], ['Тохиргоо', 'user/edit/', 'gear', $loggedIn]);
+    array_push($sideBarItems[0], ['Миний номнууд', '/book/user/' . $userId, 'book-open', $loggedIn]);
+    array_push($sideBarItems[0], ['Тохиргоо', '/user/edit/', 'gear', $loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[1], ['Хэрэглэгч', 'user', 'user', true]);
-    array_push($sideBarItems[1], ['Захиалга', 'librarian', 'book', true]);
-    array_push($sideBarItems[1], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
+    array_push($sideBarItems[1], ['Хэрэглэгч', '/user', 'user', true]);
+    array_push($sideBarItems[1], ['Захиалга', '/librarian', 'book', true]);
+    array_push($sideBarItems[1], ['Тохиргоо', '/user/edit', 'gear', $loggedIn]);
     
     array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[2], ['Хэрэглэгч', 'user', 'user', true]);
-    array_push($sideBarItems[2], ['Ном', 'book', 'book', true]);
-    array_push($sideBarItems[2], ['Тохиргоо', 'user/edit', 'gear', $loggedIn]);
+    array_push($sideBarItems[2], ['Хэрэглэгч', '/user', 'user', true]);
+    array_push($sideBarItems[2], ['Ном', '/book', 'book', true]);
+    array_push($sideBarItems[2], ['Тохиргоо', '/user/edit', 'gear', $loggedIn]);
     ?>
 
     <aside id="default-sidebar"
@@ -137,7 +137,6 @@
                     @if ($item[3])
                         <li class="px-2 rounded-lg">
                             <a href="{{ $item[1] }}"
-                                @if (Request::path() == $item[0]) class="flex items-center p-3 rounded-lg bg-primary text-white hover:bg-slate-700" @endif
                                 class="flex items-center p-3 hover:bg-onHover rounded-lg group">
                                 <i class="fa-solid fa-{{ $item[2] }} pr-2"></i>
                                 <span>

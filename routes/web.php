@@ -4,9 +4,6 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use App\Http\Middleware\CheckLibrarian;
-use App\Http\Middleware\CheckManager;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,11 +39,11 @@ Route::get('/', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show']);
 Route::get('/book/user/{user}', [LibrarianController::class, 'index']);
 
-Route::middleware(['auth', CheckLibrarian::class])->prefix("librarian")->group(function () {
+Route::middleware(['auth', 'librarian'])->prefix("librarian")->group(function () {
     Route::get('', [LibrarianController::class, 'index']);
 });
 
-Route::middleware(['auth', CheckManager::class])->prefix("manager")->group(function () {
+Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {
     Route::get('', [ManagerController::class, 'index']);
     Route::get('/create', [ManagerController::class, 'create']);
     Route::post('/store', [ManagerController::class, 'store']);

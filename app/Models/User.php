@@ -32,11 +32,11 @@ class User extends Authenticatable
     ];
     protected $hidden = [
         'password',
-        'selected_role'
+        'selected_role',
+        'remember_token',
     ];
     protected $casts = [
-        'validated_at' => 'datetime',
+        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public $timestamps = false;
 }

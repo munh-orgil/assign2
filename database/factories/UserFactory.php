@@ -30,8 +30,6 @@ class UserFactory extends Factory
             'phone_no' => fake()->phoneNumber(),
             'role' => fake()->numberBetween(0, 2),
             'balance' => fake()->numberBetween(0, 50000),
-            'is_valid' => fake()->numberBetween(0, 1),
-            'validated_at' => now()->format('Y-m-d H:i:s'),
             'created_at' => now()->format('Y-m-d H:i:s'),
         ];
     }
