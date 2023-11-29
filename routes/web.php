@@ -41,7 +41,7 @@ Route::get('/book/{book}', [BookController::class, 'show']);
 Route::middleware('auth')->get('/my_books/{user_id}', [UserBookController::class, 'myBooks']);
 
 Route::middleware(['auth', 'librarian'])->prefix("librarian")->group(function () {
-    Route::get('', [LibrarianController::class, 'index']);
+    Route::get('', [UserBookController::class, 'allBooks']);
 });
 
 Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {

@@ -9,7 +9,7 @@
             <!-- Номны нэр -->
             <div>
                 <x-input-label for="title" :value="__('Номны нэр')" />
-                <x-text-input id="title" class="block mt-1 w-full" type="title" name="title" :value="old('title')" required
+                <x-text-input id="title" class="block mt-1 w-full" type="title" name="title" :value="old('title')"
                     autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
@@ -18,7 +18,7 @@
             <div class="mt-4">
                 <x-input-label for="description" :value="__('Номны тайлбар')" />
 
-                <x-textarea id="description" class="block mt-1 w-full" type="description" name="description" required
+                <x-textarea id="description" class="block mt-1 w-full" type="description" name="description"
                     autocomplete="current-description" />
 
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
@@ -28,7 +28,7 @@
             <div class="mt-4">
                 <x-input-label for="author" :value="__('Зохиолч')" />
 
-                <x-text-input id="author" class="block mt-1 w-full" type="author" name="author" required
+                <x-text-input id="author" class="block mt-1 w-full" type="author" name="author"
                     autocomplete="current-author" />
 
                 <x-input-error :messages="$errors->get('author')" class="mt-2" />
@@ -38,7 +38,7 @@
             <div class="mt-4">
                 <x-input-label for="picture" :value="__('Зураг оруулах')" />
 
-                <x-file-input id="picture" class="block mt-1 w-full" type="picture" name="picture" required
+                <x-file-input id="picture" class="block mt-1 w-full" type="picture" name="picture"
                     autocomplete="current-picture" />
 
                 <x-input-error :messages="$errors->get('picture')" class="mt-2" />
@@ -48,7 +48,7 @@
             <div class="mt-4">
                 <x-input-label for="published_date" :value="__('Хэвлэгдсэн он')" />
 
-                <x-date-input id="published_date" class="block mt-1 w-full" type="published_date" name="published_date" required
+                <x-date-input id="published_date" class="block mt-1 w-full" type="published_date" name="published_date"
                     autocomplete="current-published_date" />
 
                 <x-input-error :messages="$errors->get('published_date')" class="mt-2" />
@@ -58,7 +58,7 @@
             <div class="mt-4">
                 <x-input-label for="page_count" :value="__('Хуудасны тоо')" />
 
-                <x-text-input id="page_count" class="block mt-1 w-full" type="page_count" name="page_count" required
+                <x-text-input id="page_count" class="block mt-1 w-full" type="page_count" name="page_count"
                     autocomplete="current-page_count" />
 
                 <x-input-error :messages="$errors->get('page_count')" class="mt-2" />
@@ -68,7 +68,7 @@
             <div class="mt-4">
                 <x-input-label for="remaining_count" :value="__('Үлдэгдэл')" />
 
-                <x-text-input id="remaining_count" class="block mt-1 w-full" type="remaining_count" name="remaining_count" required
+                <x-text-input id="remaining_count" class="block mt-1 w-full" type="remaining_count" name="remaining_count"
                     autocomplete="current-remaining_count" />
 
                 <x-input-error :messages="$errors->get('remaining_count')" class="mt-2" />
