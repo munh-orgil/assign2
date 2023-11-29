@@ -4,6 +4,7 @@
             <a href="/" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back
             </a>
             <div class="flex">
+                {{-- @dd($book->picture) --}}
                 <img class="hidden w-48 h-full mr-12 md:block rounded-lg"
                     src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
                 <div class="flex divide-x-2">

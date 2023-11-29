@@ -40,6 +40,6 @@ class LibrarianController extends Controller
             }
         }
 
-        return view('librarian.index', ['results' => $result]);
+        return view('librarian.index', ['results' => $result, 'bookUsers' => $bookUsers]);
     }
 }

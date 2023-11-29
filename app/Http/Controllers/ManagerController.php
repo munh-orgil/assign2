@@ -35,43 +35,49 @@ class ManagerController extends Controller
     public function store(Request $request)
     {
         // dd($request->file("picture"));
-        $request->validate([
-            'book_name' => ['required', 'string', 'max:255'],
+        $formFields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
-            'picture' => 'required|mimes:jpg,png|max:5000',
+            'picture' => 'mimes:jpg,png|max:5000',
             'published_date' => ['required'],
             'page_count' => ['required', 'int'],
             'remaining_count' => ['required', 'int'],
         ]);
 
-        $image = $request->file('picture');
+        if($request->hasFile('picture')){
+            $formFields['picture'] = $request->file('picture')->store('pictures','public');
+        };
 
-        $nextId = DB::select("select AUTO_INCREMENT from information_schema.tables where table_name = 'book' AND table_schema = 'bookstore'");
-        // dd($nextId);
-        $nextIdStr = $nextId[0]->AUTO_INCREMENT;
-
-        $new_name = 'book' . $nextIdStr . '.' . $image->getClientOriginalExtension();
-        $image->move(storage_path('app/public/pictures'), $new_name);
-
-        Book::create([
-            'title' => $request->book_name,
-            'description' => $request->description,
-            'author' => $request->author,
-            'picture' => $new_name,
-            'published_date' => $request->published_date,
-            'page_count' => $request->page_count,
-            'remaining_count' => $request->remaining_count,
-        ]);
+        Book::create($formFields);
 
         return redirect('/manager/create')->with('message', "Ном бүртгэгдлээ");
     }
-    public function getBook(int $id)
+    public function edit(int $id)
     {
-        return view('manager.edit', ['book' => Book::where('id', '=', $id)]);
+        $book = Book::where('id', '=', $id)->first();
+        return view('manager.edit', ['book' => $book]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Book $book)
     {
+        // dd($request->file("picture"));
+        $formFields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'picture' => 'mimes:jpg,png|max:5000',
+            'published_date' => ['required'],
+            'page_count' => ['required', 'int'],
+            'remaining_count' => ['required', 'int'],
+        ]);
+
+        if($request->hasFile('picture')){
+            $formFields['picture'] = $request->file('picture')->store('pictures','public');
+        };
+        
+        $book->update($formFields);
+
+        return redirect("/manager")->with('success', "Ном засагдлаа");
     }
 }

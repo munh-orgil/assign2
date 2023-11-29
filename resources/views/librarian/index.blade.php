@@ -1,4 +1,7 @@
 <x-layout>
+    <div class="flex-2 px-8 pb-2">
+        {{ $bookResults->links() }}
+    </div>
     <div class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
         <div class="flex flex-col justify-center h-full">
             <div class="w-full max-w-8xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">

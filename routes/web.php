@@ -47,6 +47,8 @@ Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {
     Route::get('', [ManagerController::class, 'index']);
     Route::get('/create', [ManagerController::class, 'create']);
     Route::post('/store', [ManagerController::class, 'store']);
+    Route::get('/edit/{id}', [ManagerController::class, 'edit']);
+    Route::put('/update/{book}', [ManagerController::class, 'update']);
 });
 
 require __DIR__ . '/auth.php';

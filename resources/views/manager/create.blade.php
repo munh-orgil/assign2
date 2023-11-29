@@ -8,10 +8,10 @@
 
             <!-- Номны нэр -->
             <div>
-                <x-input-label for="book_name" :value="__('Номны нэр')" />
-                <x-text-input id="book_name" class="block mt-1 w-full" type="book_name" name="book_name" :value="old('book_name')" required
+                <x-input-label for="title" :value="__('Номны нэр')" />
+                <x-text-input id="title" class="block mt-1 w-full" type="title" name="title" :value="old('title')" required
                     autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('book_name')" class="mt-2" />
+                <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 
             <!-- Номны тайлбар -->
