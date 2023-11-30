@@ -9,7 +9,7 @@
                 value="@isset($_GET['search']){{ $_GET['search'] }}@endisset"
                 placeholder="Номын нэр, тайлбар, эсвэл зохиогчоор хайх..." />
             <div class="absolute top-1 right-1">
-                <button type="submit" class="h-10 w-20 text-white rounded-lg bg-primary hover:bg-secondary">
+                <button type="submit" class="h-10 w-20 text-white rounded-lg bg-primary hover:bg-slate-700">
                     Хайх
                 </button>
             </div>

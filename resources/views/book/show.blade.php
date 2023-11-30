@@ -22,7 +22,7 @@
                     </div>
                     <div class="flex-2">
                         <div class="pl-8">
-                            <button class="bg-primary rounded-lg px-4 py-2 text-white"
+                            <button  class="bg-primary rounded-lg px-4 py-2 text-white"
                                 @if ($book->remaining_count == 0 || !$book->can_purchase) @disabled(true) @endif>Захиалах</button>
                         </div>
                         <table class="border-separate border-spacing-2 mt-8 ml-2">

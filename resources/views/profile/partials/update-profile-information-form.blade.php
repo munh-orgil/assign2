@@ -68,12 +68,6 @@
                             {{ __('Энд дарж баталгаажуулах мэйл авна уу.') }}
                         </button>
                     </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('Таны бүртгэлтэй и-мэйл хаяг руу баталгаажуулах линк илгээлээ.') }}
-                        </p>
-                    @endif
                 </div>
             @endif
         </div>
