@@ -4,7 +4,7 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('Whoops!')
+# @lang('Өөө..!')
 @else
 # @lang('Сайн байна уу!')
 @endif
