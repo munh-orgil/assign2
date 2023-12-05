@@ -16,8 +16,23 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'reg_no' => ['nullable', 'regex:/^[а-яА-ЯөӨүҮ]{2}[0-9]{8}$/u'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'phone_no' => ['nullable', 'regex:/^\d{8}$/u'],
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'last_name.max' => 'Хүсэлт хэтэрхий урт байна',
+            'first_name.max' => 'Хүсэлт хэтэрхий урт байна',
+            'last_name.required' => 'Овог заавал оруулах шаардлагатай',
+            'first_name.required' => 'Нэр заавал оруулах шаардлагатай',
+            'address.max' => 'Хүсэлт хэтэрхий урт байна',
+            'reg_no.regex' => 'Зөв регистерийн дугаар оруулна уу',
+            'phone_no.regex' => 'Зөв утасны дугаар оруулна уу',
         ];
     }
 }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone_no')->nullable();
             $table->integer('role')->default(0);
-            $table->integer('balance')->default(50000);
+            $table->integer('balance')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

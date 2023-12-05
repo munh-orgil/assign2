@@ -29,7 +29,7 @@
             },
         }
     </script>
-    <title>Bookstore</title>
+    <title>Номын сан</title>
 </head>
 
 
@@ -91,17 +91,15 @@ if (auth()->user() != null) {
                         </form>
                     </li>
                 @endif
-                <li class="flex items-center p-2 hover:bg-onHover rounded-lg group">
-                    <a href="/profile">
-                        <div class="flex gap-2 items-center">
-                            <span class="font-bold">
-                                {{ auth()->user()->first_name }}
-                            </span>
+                <li class="flex items-center p-2">
+                    <div class="flex gap-2 items-center">
+                        <span class="font-bold">
+                            {{ auth()->user()->first_name }}
+                        </span>
 
-                            <img class="hidden w-10 md:block rounded-full border-2 border-solid border-gray-300"
-                                src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('/assets/no-avatar.jpg') }}" />
-                        </div>
-                    </a>
+                        <img class="hidden w-10 md:block rounded-full border-2 border-solid border-gray-300"
+                            src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('/assets/no-avatar.jpg') }}" />
+                    </div>
                 </li>
             @endauth
         </ul>
@@ -115,16 +113,16 @@ if (auth()->user() != null) {
     }
     array_push($sideBarItems[0], ['Нүүр', '/', 'house', true]);
     array_push($sideBarItems[0], ['Миний номнууд', '/my_books/' . $userId, 'book-open', $loggedIn]);
-    array_push($sideBarItems[0], ['Тохиргоо', '/user/edit/', 'gear', $loggedIn]);
+    array_push($sideBarItems[0], ['Тохиргоо', '/profile', 'gear', $loggedIn]);
     
     array_push($sideBarItems[1], ['Нүүр', '/', 'house', true]);
     array_push($sideBarItems[1], ['Захиалга', '/librarian', 'book', true]);
-    array_push($sideBarItems[1], ['Тохиргоо', '/user/edit', 'gear', $loggedIn]);
+    array_push($sideBarItems[1], ['Тохиргоо', '/profile', 'gear', $loggedIn]);
     
     array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
     array_push($sideBarItems[2], ['Хэрэглэгч', '/user', 'user', true]);
     array_push($sideBarItems[2], ['Ном', '/manager', 'book', true]);
-    array_push($sideBarItems[2], ['Тохиргоо', '/user/edit', 'gear', $loggedIn]);
+    array_push($sideBarItems[2], ['Тохиргоо', '/profile', 'gear', $loggedIn]);
     ?>
 
     <aside id="default-sidebar"

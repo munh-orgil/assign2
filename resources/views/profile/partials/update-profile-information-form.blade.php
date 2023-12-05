@@ -20,42 +20,43 @@
         <div>
             <x-input-label for="last_name" :value="__('Овог')" />
             <x-text-input id="last_name" name="last_name" type="text" class="mt-1 border block w-full"
-                :value="old('last_name', $user->last_name)" required autofocus autocomplete="last_name" />
+                :value="old('last_name', $user->last_name)" autofocus autocomplete="last_name" />
             <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
         </div>
 
         <div>
             <x-input-label for="first_name" :value="__('Нэр')" />
             <x-text-input id="first_name" name="first_name" type="text" class="mt-1 border block w-full"
-                :value="old('first_name', $user->first_name)" required autofocus autocomplete="first_name" />
+                :value="old('first_name', $user->first_name)" autofocus autocomplete="first_name" />
             <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
         </div>
 
         <div>
             <x-input-label for="reg_no" :value="__('Регистерийн дугаар')" />
             <x-text-input id="reg_no" name="reg_no" type="text" class="mt-1 border block w-full"
-                :value="old('reg_no', $user->reg_no)" required autofocus autocomplete="reg_no" />
+                :value="old('reg_no', $user->reg_no)" autofocus autocomplete="reg_no" />
             <x-input-error class="mt-2" :messages="$errors->get('reg_no')" />
         </div>
 
         <div>
             <x-input-label for="address" :value="__('Гэрийн хаяг')" />
             <x-text-input id="address" name="address" type="text" class="mt-1 border block w-full"
-                :value="old('address', $user->address)" required autofocus autocomplete="address" />
+                :value="old('address', $user->address)" autofocus autocomplete="address" />
             <x-input-error class="mt-2" :messages="$errors->get('address')" />
         </div>
 
         <div>
             <x-input-label for="phone_no" :value="__('Утасны дугаар')" />
             <x-phone-input id="phone_no" name="phone_no" type="text" class="mt-1 border block w-full"
-                :value="old('phone_no', $user->phone_no)" required autofocus autocomplete="phone_no" />
+                :value="old('phone_no', $user->phone_no)" autofocus autocomplete="phone_no" />
             <x-input-error class="mt-2" :messages="$errors->get('phone_no')" />
         </div>
 
         <div>
             <x-input-label for="email" :value="__('И-Мэйл')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 border block w-full"
-                :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" disabled
+                class="mt-1 border block w-full disabled:border-opacity-75 disabled:text-gray-500" :value="old('email', $user->email)"
+                autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if (!$user->hasVerifiedEmail())

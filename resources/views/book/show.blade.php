@@ -22,8 +22,11 @@
                     </div>
                     <div class="flex-2">
                         <div class="pl-8">
-                            <button  class="bg-primary rounded-lg px-4 py-2 text-white"
-                                @if ($book->remaining_count == 0 || !$book->can_purchase) @disabled(true) @endif>Захиалах</button>
+                            <form action="/order/{{ $book->id }}" method="POST">
+                                @csrf
+                                <input type="submit" value="Захиалах"
+                                    class="bg-slate-800 rounded-lg px-4 py-2 text-white disabled:bg-slate-700 cursor-pointer" />
+                            </form>
                         </div>
                         <table class="border-separate border-spacing-2 mt-8 ml-2">
                             <tr>

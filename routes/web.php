@@ -26,10 +26,6 @@ use Illuminate\Support\Facades\Route;
 // update - update the edited object
 // delete - delete the object
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,9 +35,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show']);
 Route::middleware('auth')->get('/my_books/{user_id}', [UserBookController::class, 'myBooks']);
+Route::middleware('auth')->post('/order/{book}', [UserBookController::class, 'order']);
 
 Route::middleware(['auth', 'librarian'])->prefix("librarian")->group(function () {
     Route::get('', [UserBookController::class, 'allBooks']);
+    Route::put('', [UserBookController::class, 'bookStateChange']);
+    Route::put('extend', [UserBookController::class, 'extend']);
 });
 
 Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {

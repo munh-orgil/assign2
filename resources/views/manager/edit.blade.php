@@ -5,17 +5,17 @@
     <form method="POST" enctype="multipart/form-data" action="{{ url("/manager/update/$book->id") }}">
         @csrf
         @method('PUT')
-        <!-- Номны нэр -->
+        <!-- Номын нэр -->
         <div>
-            <x-input-label for="title" :value="__('Номны нэр')" />
+            <x-input-label for="title" :value="__('Номын нэр')" />
             <x-text-input id="title" class="block mt-1 w-full" type="title" name="title" value="{{ $book->title }}"
                 required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('title')" class="mt-2" />
         </div>
 
-        <!-- Номны тайлбар -->
+        <!-- Номын тайлбар -->
         <div class="mt-4">
-            <x-input-label for="description" :value="__('Номны тайлбар')" />
+            <x-input-label for="description" :value="__('Номын тайлбар')" />
 
             <x-textarea id="description" class="block mt-1 w-full" type="description" name="description" required
                 autocomplete="current-description">

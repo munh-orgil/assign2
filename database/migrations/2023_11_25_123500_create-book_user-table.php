@@ -17,11 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
             $table->foreign('user_id')->references("id")->on("user");
             $table->foreign('book_id')->references("id")->on("book");
-            $table->integer('status');
-            $table->timestampTz('created_at')->nullable();
-            $table->integer('created_by')->nullable();
+            $table->integer('status')->default(0);
             $table->timestampTz('received_at')->nullable();
             $table->timestampTz('expire_at')->nullable();
+            $table->timestamps();
         });
     }
 

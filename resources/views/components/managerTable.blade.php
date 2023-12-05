@@ -12,7 +12,7 @@
                         <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                             <tr>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Номны нэр</div>
+                                    <div class="font-semibold text-left">Номын нэр</div>
                                 </th>
                                 {{-- <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Тайлбар</div> --}}
@@ -48,56 +48,63 @@
                         </thead>
                         <tbody>
                             @foreach ($books as $book)
-                            <tr class="hover:bg-gray-100">
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="font-medium text-gray-800">{{$book->title}}</div>
-                                    </div>
-                                </td>
-                                {{-- <td class="p-2 break-all">
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="font-medium text-gray-800">{{ $book->title }}</div>
+                                        </div>
+                                    </td>
+                                    {{-- <td class="p-2 break-all">
                                     <textarea cols="30" rows="3" class="resize-none line-clamp-3" readonly>{{$book->description}}</textarea>
                                 </td> --}}
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->author}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->published_date}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->remaining_count}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->created_at}}</div>
-                                </td>
-                                {{-- <td class="p-2 whitespace-nowrap">
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium">{{ $book->author }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium">{{ $book->published_date }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium">{{ $book->remaining_count }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium">{{ $book->created_at }}</div>
+                                    </td>
+                                    {{-- <td class="p-2 whitespace-nowrap">
                                     <div class="text-left font-medium">{{$book->created_by}}</div> --}}
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->updated_at}}</div>
-                                </td>
-                                {{-- <td class="p-2 whitespace-nowrap">
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium">{{ $book->updated_at }}</div>
+                                    </td>
+                                    {{-- <td class="p-2 whitespace-nowrap">
                                     <div class="text-left font-medium">{{$book->updated_by}}</div> --}}
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-lg text-center">
-                                        <button onclick="document.location.href='/manager/edit/' + {{$book->id}}" class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button" >
-                                        <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </span>
-                                      </button>
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-lg text-center">
-                                        <button class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button" >
-                                        <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </span>
-                                      </button>
-                                      
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-lg text-center">
+                                            <button
+                                                onclick="document.location.href='/manager/edit/' + {{ $book->id }}"
+                                                class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                                                type="button">
+                                                <span
+                                                    class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                                                    <i class="fa-solid fa-pencil"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-lg text-center">
+                                            <button
+                                                class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                                                type="button">
+                                                <span
+                                                    class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </span>
+                                            </button>
+
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('picture')->nullable();
             $table->date('published_date')->nullable();
             $table->integer('page_count')->nullable();
-            $table->integer('remaining_count');
+            $table->integer('remaining_count')->default(0);
             $table->timestampTz('created_at')->nullable();
             $table->integer('created_by')->nullable();
             $table->timestampTz('updated_at')->nullable();
