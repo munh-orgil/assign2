@@ -39,10 +39,16 @@ class UserBookController extends Controller
             $bookUser = BookUser::where("id", "=", $request->id)->first();
             if ($bookUser->status == 0) {
                 $user = User::where("id", "=", $bookUser->user_id)->first();
+                if ($user->balance < 3500) {
+                    return back()->with("warning", "Хэрэглэгчийн үлдэгдэл хүрэлцэхгүй байна");
+                }
                 $user->balance -= 3500;
                 $user->save();
             }
             $now = Carbon::now();
+            if ($request->status == 1) {
+                $bookUser->received_at = $now;
+            }
             $bookUser->status = $request->status;
             $bookUser->expire_at = $now->addDays(7);
             $bookUser->save();

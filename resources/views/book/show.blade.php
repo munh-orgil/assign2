@@ -65,14 +65,6 @@
                                     @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <i class="fa-regular fa-star pr-2" style="color: #ffd500;"></i> Үнэлгээ:
-                                </td>
-                                <td class="font-bold">
-
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>

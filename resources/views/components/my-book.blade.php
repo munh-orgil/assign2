@@ -4,12 +4,11 @@
 <?php
 $statusItems = [['Аваагүй', 'yellow'], ['Хүлээж авсан', 'gray'], ['Сунгасан', '#052432'], ['Буцааж өгсөн', 'green'], ['Хугацаа хэтэрсэн', 'red']];
 // dd($book);
-// if ($book->pivot_status != null && $book->pivot_expire_at != null) {
-if ($book->pivot_status != 3 && date('Y-m-d H:m:s') > $book->pivot_expire_at) {
-    $book->pivot_status = 4;
+// dd($book->pivot->status);
+if ($book->pivot->status != 3 && date('Y-m-d H:m:s') > $book->pivot->expire_at) {
+    $book->pivot->status = 4;
 }
-// }
-$statusObject = $statusItems[$book->pivot_status];
+$statusObject = $statusItems[$book->pivot->status];
 ?>
 
 <x-card class="hover:bg-onHover bg-white cursor-pointer" onclick="document.location.href='/book/' + {{ $book->id }}">
@@ -28,7 +27,7 @@ $statusObject = $statusItems[$book->pivot_status];
                 Хүлээж авсан: {{ $book->published_date }}
             </div>
             <div class="text-sm pt-2 font-bold ">
-                Дуусах: {{ $book->published_date }}
+                Дуусах: {{ $book->pivot->expire_at }}
             </div>
         </div>
     </div>

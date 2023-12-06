@@ -32,7 +32,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        $dropdownItems = [['name' => 'аваагүй', 'color' => 'gray-500'], ['name' => 'хүлээж авсан', 'color' => 'blue-400'], ['name' => 'сунгасан', 'color' => 'yellow-500'], ['name' => 'буцааж өгсөн', 'color' => 'green-600'], ['name' => 'хугацаа хэтэрсэн', 'color' => 'red-400']];
+                        ?>
                         @foreach ($books as $book)
+                            <?php
+                            if ($book->status == 1 && date('Y-m-d H:m:s') > $book->expire_at) {
+                                $book->status = 4;
+                            }
+                            ?>
+
                             <tr class="hover:bg-gray-200">
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -52,10 +61,6 @@
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-left font-medium">{{ $book->expire_at }}</div>
                                 </td>
-
-                                <?php
-                                $dropdownItems = [['name' => 'аваагүй', 'color' => 'gray-500'], ['name' => 'хүлээж авсан', 'color' => 'blue-400'], ['name' => 'сунгасан', 'color' => 'yellow-500'], ['name' => 'буцааж өгсөн', 'color' => 'green-600'], ['name' => 'хугацаа хэтэрсэн', 'color' => 'red-400']];
-                                ?>
 
                                 <td class="p-2 whitespace-nowrap">
                                     <x-dropdown>
