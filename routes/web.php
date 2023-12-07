@@ -6,6 +6,8 @@ use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBookController;
+use App\Models\User;
+use App\Events\TestPushNotification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,7 +60,21 @@ Route::get("/test", function(){
 });
 Route::post("/test", function(){
     $name = request()->name;
-    event(new TestNotification($name));
-    return view('librarian.test');
+    $user = User::findOrFail($name);
+    $user->notify(new TestPushNotification($user->id , 'someone comment on your post'));
+    // dd($user);
+    // event(new TestNotification($name));
+    
+    dd('notification sent');
+    // return view('librarian.test');
+});
+
+Route::get('/test2', function () {
+    
+    $user = User::findOrFail(12);
+    // dd($user);
+    $user->notify(new TestPushNotification($user->id , 'someone comment on your post'));
+    
+    dd('notification sent');
 });
 require __DIR__ . '/auth.php';
