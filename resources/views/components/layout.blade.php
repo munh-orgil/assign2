@@ -29,21 +29,6 @@
             },
         }
     </script>
-    {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-    
-        var pusher = new Pusher('11856c344a210392e6fe', {
-          cluster: 'ap3'
-        });
-    
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('test-notification', function(data) {
-          alert(JSON.stringify(data));
-        });
-      </script> --}}
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         @php
@@ -62,7 +47,7 @@
 
             if (data.user_id == {{ $userId }}) {
 
-                alert(`Hi ${data.comment}`) //here you can add you own logic
+                alert(`Таны ном ${data.comment}-н хугацааг сунгалаа!`) //here you can add you own logic
             }
         });
     </script>

@@ -10,6 +10,7 @@ use Clockwork\Request\UserDataItem;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\TestPushNotification;
 
 class UserBookController extends Controller
 {
@@ -63,6 +64,9 @@ class UserBookController extends Controller
         $expireTime = Carbon::createFromFormat('Y-m-d H:i:s', $bookUser->expire_at);
         $bookUser->expire_at = $expireTime->addDay();
         $bookUser->save();
+        $user = User::findOrFail($bookUser->user_id);
+        $book = Book::findOrFail($bookUser->book_id);
+        $user->notify(new TestPushNotification($user->id , $book->title));
         return back()->with("success", "Амжилттай");
     }
 

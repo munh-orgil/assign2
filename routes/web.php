@@ -54,27 +54,11 @@ Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {
     Route::put('/update/{book}', [ManagerController::class, 'update']);
 });
 
-
-Route::get("/test", function(){
-    return view('librarian.test');
-});
 Route::post("/test", function(){
-    $name = request()->name;
-    $user = User::findOrFail($name);
-    $user->notify(new TestPushNotification($user->id , 'someone comment on your post'));
-    // dd($user);
-    // event(new TestNotification($name));
-    
-    dd('notification sent');
-    // return view('librarian.test');
+    $id = request()->name;
+    $user = User::findOrFail($id);
+    $user->notify(new TestPushNotification($user->id , 'Таны номыг сунгалаа'));
+    // dd('notification sent');
 });
 
-Route::get('/test2', function () {
-    
-    $user = User::findOrFail(12);
-    // dd($user);
-    $user->notify(new TestPushNotification($user->id , 'someone comment on your post'));
-    
-    dd('notification sent');
-});
 require __DIR__ . '/auth.php';
