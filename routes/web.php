@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TestNotification;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ManagerController;
@@ -51,4 +52,13 @@ Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {
     Route::put('/update/{book}', [ManagerController::class, 'update']);
 });
 
+
+Route::get("/test", function(){
+    return view('librarian.test');
+});
+Route::post("/test", function(){
+    $name = request()->name;
+    event(new TestNotification($name));
+    return view('librarian.test');
+});
 require __DIR__ . '/auth.php';

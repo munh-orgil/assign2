@@ -80,4 +80,6 @@ class ManagerController extends Controller
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
+
+    
 }
