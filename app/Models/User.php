@@ -15,9 +15,6 @@ class User extends Authenticatable
     protected $table = 'user';
     protected $primaryKey = 'id';
     protected $dateFormat = 'Y-m-d H:i:s';
-    protected $attributes = [
-        'balance' => 50000,
-    ];
     protected $fillable = [
         'email',
         'reg_no',

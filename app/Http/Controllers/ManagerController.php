@@ -37,21 +37,21 @@ class ManagerController extends Controller
         // dd($request->file("picture"));
         $formFields = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string',],
             'author' => ['required', 'string', 'max:255'],
-            'picture' => 'mimes:jpg,png|max:5000',
+            'picture' => 'max:500000',
             'published_date' => ['required'],
             'page_count' => ['required', 'int'],
             'remaining_count' => ['required', 'int'],
         ]);
 
-        if($request->hasFile('picture')){
-            $formFields['picture'] = $request->file('picture')->store('pictures','public');
+        if ($request->hasFile('picture')) {
+            $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
         };
 
         Book::create($formFields);
 
-        return redirect('/manager/create')->with('message', "Ном бүртгэгдлээ");
+        return redirect('/manager/create')->with('success', "Ном бүртгэгдлээ");
     }
     public function edit(int $id)
     {
@@ -64,22 +64,20 @@ class ManagerController extends Controller
         // dd($request->file("picture"));
         $formFields = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
             'author' => ['required', 'string', 'max:255'],
-            'picture' => 'mimes:jpg,png|max:5000',
+            'picture' => 'max:500000',
             'published_date' => ['required'],
             'page_count' => ['required', 'int'],
             'remaining_count' => ['required', 'int'],
         ]);
 
-        if($request->hasFile('picture')){
-            $formFields['picture'] = $request->file('picture')->store('pictures','public');
+        if ($request->hasFile('picture')) {
+            $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
         };
-        
+
         $book->update($formFields);
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
-
-    
 }

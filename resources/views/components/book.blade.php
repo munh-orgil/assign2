@@ -12,7 +12,7 @@
         <img class="hidden w-32 mr-6 md:block rounded-sm object-cover"
             src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
         <div class="flex-1 relative">
-            <span class="text-xl font-bold line-clamp-1 py-2">
+            <span class="text-xl font-bold line-clamp-1 py-2 whitespace-nowrap">
                 <a href="/book/{{ $book->id }}">{{ $book->title }}</a>
             </span>
             <div class="text-sm font-bold pt-1">

@@ -2,7 +2,7 @@
 
 {{-- @dd($book) --}}
 <?php
-$statusItems = [['Аваагүй', 'yellow'], ['Хүлээж авсан', 'gray'], ['Сунгасан', '#052432'], ['Буцааж өгсөн', 'green'], ['Хугацаа хэтэрсэн', 'red']];
+$statusItems = [['Аваагүй', 'gray-500'], ['Хүлээж авсан', 'blue-400'], ['Сунгасан', 'yellow-500'], ['Буцааж өгсөн', 'green-600'], ['Хугацаа хэтэрсэн', 'red-400']];
 // dd($book);
 // dd($book->pivot->status);
 if ($book->pivot->status != 3 && date('Y-m-d H:m:s') > $book->pivot->expire_at) {
@@ -20,7 +20,7 @@ $statusObject = $statusItems[$book->pivot->status];
                 <a href="/book/{{ $book->id }}">{{ $book->title }}</a>
             </span>
             <div class="text-sm font-bold pt-1">
-                Төлөв: <span class="" style="color: {{ $statusObject[1] }}">
+                Төлөв: <span class="text-{{ $statusObject[1] }}">
                     {{ $statusObject[0] }} </span>
             </div>
             <div class="text-sm pt-2 font-bold ">

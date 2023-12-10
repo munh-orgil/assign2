@@ -24,7 +24,7 @@ class UserBookController extends Controller
     }
     public function allBooks()
     {
-        $bookUsers = BookUser::latest()->paginate(20);
+        $bookUsers = BookUser::orderBy('expire_at', 'DESC')->filter(request(['book', 'user']))->paginate(10);
 
         foreach ($bookUsers as $bookUser) {
             $bookUser->book = Book::where("id", "=", $bookUser->book_id)->first();
@@ -66,7 +66,7 @@ class UserBookController extends Controller
         $bookUser->save();
         $user = User::findOrFail($bookUser->user_id);
         $book = Book::findOrFail($bookUser->book_id);
-        $user->notify(new TestPushNotification($user->id , $book->title));
+        $user->notify(new TestPushNotification($user->id, $book->title));
         return back()->with("success", "Амжилттай");
     }
 
