@@ -52,6 +52,7 @@ Route::middleware(['auth', 'manager'])->prefix("manager")->group(function () {
     Route::post('/store', [ManagerController::class, 'store']);
     Route::get('/edit/{id}', [ManagerController::class, 'edit']);
     Route::put('/update/{book}', [ManagerController::class, 'update']);
+    Route::delete('/delete/{book}', [ManagerController::class, 'delete']);
 });
 
 Route::post("/test", function(){

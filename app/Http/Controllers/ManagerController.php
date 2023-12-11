@@ -80,4 +80,9 @@ class ManagerController extends Controller
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
+    public function delete(Book $book)
+    {
+        $book->delete();
+        return redirect("/manager")->with('success', "Ном устгагдлаа");
+    }
 }

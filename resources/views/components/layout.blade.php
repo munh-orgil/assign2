@@ -35,7 +35,6 @@
             $userId = auth()->check() ? auth()->user()->id : 0;
         @endphp
 
-        // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
         var pusher = new Pusher('11856c344a210392e6fe', {
@@ -47,7 +46,7 @@
 
             if (data.user_id == {{ $userId }}) {
 
-                alert(`Таны ном ${data.comment}-н хугацааг сунгалаа!`) //here you can add you own logic
+                alert(`Таны ном ${data.comment}-н хугацааг сунгалаа!`)
             }
         });
     </script>
