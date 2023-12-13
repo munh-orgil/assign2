@@ -15,7 +15,7 @@ class UserController extends Controller
     }
     public function list()
     {
-        $users = User::filter(request(['user']))->paginate(1);
+        $users = User::filter(request(['user']))->paginate(10);
         return view("user.list", ["users" => $users]);
     }
     public function editRole(Request $request)

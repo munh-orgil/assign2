@@ -20,10 +20,18 @@ use Illuminate\View\View;
 class ManagerController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->user()->role > 1) {
-            return view('manager.index', ['books' => Book::latest()->filter(request(['book']))->paginate(10)]);
+            $page = $request->has('page') ? $request->query('page') : 1;
+            $books = Book::latest()->filter(request(['book']))->paginate(10);
+            if (Redis::get('booksManager' . $page) == null) {
+                Redis::set('booksManager' . $page, serialize($books));
+                return view('manager.index', ['books' => $books]);
+            } else {
+                $books = unserialize(Redis::get('booksManager' . $page));
+                return view('manager.index', ['books' => $books]);
+            }
         } else {
             return redirect("/unauthorized");
         }
@@ -48,10 +56,11 @@ class ManagerController extends Controller
 
         if ($request->hasFile('picture')) {
             $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
-        };
+        }
+        ;
 
         Book::create($formFields);
-
+        Redis::del(Redis::keys("books*"));
         return redirect('/manager/create')->with('success', "Ном бүртгэгдлээ");
     }
     public function edit(int $id)
@@ -75,16 +84,18 @@ class ManagerController extends Controller
 
         if ($request->hasFile('picture')) {
             $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
-        };
+        }
+        ;
 
         $book->update($formFields);
-        Redis::del('books');
+        Redis::del(Redis::keys("books*"));
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
     public function delete(Book $book)
     {
         $book->delete();
+        Redis::del(Redis::keys("books*"));
         return redirect("/manager")->with('success', "Ном устгагдлаа");
     }
 }

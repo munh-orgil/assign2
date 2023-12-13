@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show']);
 Route::middleware('auth')->get('/my_books/{user_id}', [UserBookController::class, 'myBooks']);
+Route::middleware('auth')->get('/extendTime/{book_id}', [UserBookController::class, 'extendTime']);
 Route::middleware('auth')->post('/order/{book}', [UserBookController::class, 'order']);
 
 Route::middleware(['auth', 'librarian'])->prefix("librarian")->group(function () {

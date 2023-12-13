@@ -10,7 +10,7 @@
             <div>
                 <x-input-label for="title" :value="__('Номын нэр')" />
                 <x-text-input id="title" class="block mt-1 w-full" type="title" name="title" :value="old('title')"
-                    autofocus autocomplete="username" />
+                    autofocus autocomplete="title" />
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 

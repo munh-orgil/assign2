@@ -1,3 +1,4 @@
+{{-- @dd($books) --}}
 <x-layout>
     <div class="flex px-4 pb-2">
         <div>
@@ -146,7 +147,10 @@
                                             <input type="hidden" name="id" value="{{ $book->id }}" />
                                             <button type="submit"
                                                 class="rounded-lg border border-gray-400 p-2 enabled:hover:bg-gray-300 disabled:opacity-50 w-8 h-8 flex justify-center"
-                                                @if ($book->status != 1) @disabled(true) @endif>
+                                                @if ($book->extend_request == 0) @disabled(true) @endif
+                                                @if ($book->extend_request == 1 && $book->status != 1) @disabled(true) @endif
+                                                >
+                                                {{-- @dd($book->status != 1 && $book->extend_request != 1) --}}
                                                 <i class="fa-solid fa-clock-rotate-left"></i>
                                             </button>
                                         </form>

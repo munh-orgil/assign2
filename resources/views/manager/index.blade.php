@@ -1,6 +1,6 @@
 <x-layout class="min-h-full">
     <div class="flex px-4 pb-2">
-        <div class="">
+        <div>
             <form action="/manager" class="flex-1 min-w-fit">
                 <div class="relative border border-gray-300 rounded-lg items-center w-[550px]">
                     <div class="absolute top-2 left-2">
@@ -18,8 +18,18 @@
                 </div>
             </form>
         </div>
-        <div class="ml-auto my-auto">
-            {{ $books->links() }}
+        <div class="ml-auto">
+            <ul>
+                <li class="mt-auto mb-14 px-2 w-60 ">
+                    <a href="/manager/create"
+                        class="flex justify-center p-2 rounded-lg bg-primary text-white hover:bg-slate-700 group">
+                        <i class="fa-solid fa-plus my-auto pr-2"></i>
+                        <span>
+                            Ном нэмэх
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="antialiased text-gray-600 h-full px-4">
@@ -84,7 +94,7 @@
                                         <div class="text-lg text-center">
                                             <button
                                                 onclick="document.location.href='/manager/edit/' + {{ $book->id }}"
-                                                class="relative align-middle select-none font-sans text-sm text-slate-200 bg-yellow-500 border border-1 rounded-lg text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[40px] h-8 max-h-[40px] hover:opacity-60 active:bg-gray-900/20"
+                                                class="relative align-middle select-none font-sans text-sm text-white bg-yellow-400 border border-1 rounded-lg text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[40px] h-8 max-h-[40px] hover:opacity-60 active:bg-gray-900/20"
                                                 type="button">
                                                 <span
                                                     class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
@@ -99,7 +109,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
-                                                    class="relative align-middle select-none font-sans text-sm text-slate-200 bg-red-700 border border-1 rounded-lg text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[40px] h-8 max-h-[40px] hover:opacity-60 active:bg-gray-900/20"
+                                                    class="relative align-middle select-none font-sans text-sm text-white bg-red-500 border border-1 rounded-lg text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[40px] h-8 max-h-[40px] hover:opacity-60 active:bg-gray-900/20"
                                                     type="submit">
                                                     <span
                                                         class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">

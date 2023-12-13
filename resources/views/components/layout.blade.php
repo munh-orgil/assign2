@@ -45,7 +45,6 @@
         channel.bind("Illuminate\\Notifications\\Events\\BroadcastNotificationCreated", function(data) {
 
             if (data.user_id == {{ $userId }}) {
-
                 alert(`Таны ном ${data.comment}-н хугацааг сунгалаа!`)
             }
         });
@@ -113,8 +112,14 @@ if (auth()->user() != null) {
                     </li>
                 @endif
                 <li class="flex items-center p-2">
-                    <div class="flex gap-2 items-center">
-                        <span class="font-bold">
+                    <div class="flex gap-2 items-center divide-x-0  ">
+                        <span class="font-bold ">
+                            
+                            <i class="fa-solid fa-wallet"></i>  {{ auth()->user()->balance }}
+                            
+                        </span>
+
+                        <span class="font-bold ml-2">
                             {{ auth()->user()->first_name }}
                         </span>
 
