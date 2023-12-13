@@ -6,12 +6,24 @@ use App\Models\Book;
 use App\Models\BookUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
+
+// use Illuminate\Support\Facades\Cache;
+
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('book.index', ['books' => Book::latest()->filter(request(['search']))->paginate(45)]);
+        $page = $request->has('page') ? $request->query('page') : 1;
+        $books = Book::latest()->filter(request(['search']))->paginate(5);
+        if (Redis::get('books' . $page) == null) {
+            Redis::set('books' . $page, serialize($books));
+            return view('book.index', ['books' => $books]);
+        } else {
+            $books = unserialize(Redis::get('books' . $page));
+            return view('book.index', ['books' => $books]);
+        }
     }
     public function show(Book $book)
     {

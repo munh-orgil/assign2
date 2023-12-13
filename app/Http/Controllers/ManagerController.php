@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -77,6 +78,7 @@ class ManagerController extends Controller
         };
 
         $book->update($formFields);
+        Redis::del('books');
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
