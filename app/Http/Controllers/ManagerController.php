@@ -23,7 +23,7 @@ class ManagerController extends Controller
     public function index()
     {
         if (auth()->user()->role > 1) {
-            return view('manager.index', ['books' => Book::latest()->paginate(10)]);
+            return view('manager.index', ['books' => Book::latest()->filter(request(['book']))->paginate(10)]);
         } else {
             return redirect("/unauthorized");
         }

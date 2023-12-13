@@ -12,7 +12,7 @@ class Book extends Model
 
     protected $table = 'book';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function scopeFilter($query, array $filters)
     {
@@ -20,6 +20,10 @@ class Book extends Model
             $query->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('description', 'like', '%' . request('search') . '%')
                 ->orWhere('author', 'like', '%' . request('search') . '%');
+        }
+        if ($filters['book'] ?? false) {
+            $query->where('title', 'like', '%' . request('book') . '%')
+                ->orWhere('author', 'like', '%' . request('book') . '%');
         }
     }
     public function user()

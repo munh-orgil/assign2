@@ -42,4 +42,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Book::class, "book_user")->withPivot("status", "expire_at", "received_at");
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['user'] ?? false) {
+            $query->where('email', 'like', '%' . request('user') . '%')
+                ->orWhere('reg_no', 'like', '%' . request('user') . '%')
+                ->orWhere('phone_no', 'like', '%' . request('user') . '%');
+        }
+    }
 }

@@ -141,7 +141,7 @@ if (auth()->user() != null) {
     array_push($sideBarItems[1], ['Тохиргоо', '/profile', 'gear', $loggedIn]);
     
     array_push($sideBarItems[2], ['Нүүр', '/', 'house', true]);
-    array_push($sideBarItems[2], ['Хэрэглэгч', '/user', 'user', true]);
+    array_push($sideBarItems[2], ['Хэрэглэгч', '/manager/user', 'user', true]);
     array_push($sideBarItems[2], ['Ном', '/manager', 'book', true]);
     array_push($sideBarItems[2], ['Тохиргоо', '/profile', 'gear', $loggedIn]);
     ?>

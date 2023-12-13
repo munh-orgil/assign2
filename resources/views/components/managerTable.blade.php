@@ -48,15 +48,12 @@
                         </thead>
                         <tbody>
                             @foreach ($books as $book)
-                                <tr class="hover:bg-gray-100">
+                                <tr class="border-t">
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="font-medium text-gray-800">{{ $book->title }}</div>
                                         </div>
                                     </td>
-                                    {{-- <td class="p-2 break-all">
-                                    <textarea cols="30" rows="3" class="resize-none line-clamp-3" readonly>{{$book->description}}</textarea>
-                                </td> --}}
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium">{{ $book->author }}</div>
                                     </td>
@@ -69,14 +66,8 @@
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium">{{ $book->created_at }}</div>
                                     </td>
-                                    {{-- <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->created_by}}</div> --}}
-                                    </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium">{{ $book->updated_at }}</div>
-                                    </td>
-                                    {{-- <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{$book->updated_by}}</div> --}}
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-lg text-center">

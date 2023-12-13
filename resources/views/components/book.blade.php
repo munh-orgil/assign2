@@ -11,8 +11,8 @@
     <div class="flex h-48">
         <img class="hidden w-32 mr-6 md:block rounded-sm object-cover"
             src="{{ $book->picture ? asset('storage/' . $book->picture) : asset('/assets/no-picture.png') }}" />
-        <div class="flex-1 relative">
-            <span class="text-xl font-bold line-clamp-1 py-2 whitespace-nowrap">
+        <div class="flex-1 overflow-hidden">
+            <span class="text-xl font-bold py-2 truncate line-clamp-1">
                 <a href="/book/{{ $book->id }}">{{ $book->title }}</a>
             </span>
             <div class="text-sm font-bold pt-1">

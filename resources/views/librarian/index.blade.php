@@ -45,7 +45,7 @@
 
             <div class="w-full max-w-8xl mx-auto bg-white rounded-lg border p-4">
                 <table class="p-3 table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400">
+                    <thead class="text-xs font-semibold uppercase text-slate-500">
                         <tr>
                             <th class="p-2 whitespace-nowrap">
                                 <div class="font-semibold text-left">Номын дугаар</div>
@@ -82,31 +82,32 @@
                             }
                             ?>
 
-                            <tr class="">
+                            <tr class="border-t">
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="font-medium text-gray-800 pl-8">{{ $book->book->id }}</div>
+                                        <div class="text-sm text-gray-800 pl-8">{{ $book->book->id }}</div>
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{ $book->book->title }}</div>
+                                    <div class="text-left text-sm">{{ $book->book->title }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{ $book->user->first_name }}
-                                        {{ $book->user->last_name }}</div>
+                                    <div class="text-left text-sm">
+                                        {{ mb_substr($book->user->last_name, 0, 1, 'utf-8') }}.
+                                        {{ $book->user->first_name }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{ $book->user->email }}</div>
+                                    <div class="text-left text-sm">{{ $book->user->email }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium">{{ $book->expire_at }}</div>
+                                    <div class="text-left text-sm">{{ $book->expire_at }}</div>
                                 </td>
 
                                 <td class="p-2 whitespace-nowrap">
                                     <x-dropdown>
                                         <x-slot name="trigger">
                                             <button
-                                                class="flex px-3 py-2 border-2 text-sm leading-4 font-medium rounded-md text-{{ $dropdownItems[$book->status]['color'] }} focus:outline-none transition ease-in-out duration-150 w-44 line-clamp-1"
+                                                class="flex px-3 py-2 border-2 leading-4 text-sm rounded-md text-{{ $dropdownItems[$book->status]['color'] }} focus:outline-none transition ease-in-out duration-150 w-44 line-clamp-1"
                                                 @if ($book->status == 3) @disabled(true) @endif>
                                                 <div>{{ $dropdownItems[$book->status]['name'] }}</div>
                                                 <div class="ml-auto fill-slate-600">
@@ -129,7 +130,7 @@
                                                     $item = $allowed[$book->status][$i];
                                                     ?>
                                                     <button type="submit" value="{{ $item }}" name="status"
-                                                        class="block p-2 hover:bg-slate-200 group w-full text-{{ $dropdownItems[$item]['color'] }} text-start">
+                                                        class="block p-2 hover:bg-slate-200 group w-full text-{{ $dropdownItems[$item]['color'] }} text-start text-sm">
                                                         {{ $dropdownItems[$item]['name'] }}
                                                     </button>
                                                 @endfor
