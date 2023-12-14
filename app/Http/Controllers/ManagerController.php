@@ -56,11 +56,13 @@ class ManagerController extends Controller
 
         if ($request->hasFile('picture')) {
             $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
-        }
-        ;
+        };
 
         Book::create($formFields);
-        Redis::del(Redis::keys("books*"));
+        try {
+            Redis::del(Redis::keys("books*"));
+        } catch (\Throwable $th) {
+        }
         return redirect('/manager/create')->with('success', "Ном бүртгэгдлээ");
     }
     public function edit(int $id)
@@ -84,18 +86,23 @@ class ManagerController extends Controller
 
         if ($request->hasFile('picture')) {
             $formFields['picture'] = $request->file('picture')->store('pictures', 'public');
-        }
-        ;
+        };
 
         $book->update($formFields);
-        Redis::del(Redis::keys("books*"));
+        try {
+            Redis::del(Redis::keys("books*"));
+        } catch (\Throwable $th) {
+        }
 
         return redirect("/manager")->with('success', "Ном засагдлаа");
     }
     public function delete(Book $book)
     {
         $book->delete();
-        Redis::del(Redis::keys("books*"));
+        try {
+            Redis::del(Redis::keys("books*"));
+        } catch (\Throwable $th) {
+        }
         return redirect("/manager")->with('success', "Ном устгагдлаа");
     }
 }

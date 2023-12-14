@@ -27,16 +27,23 @@ class UserBookController extends Controller
         return view('book.my_books', ['books' => $books]);
     }
 
-    public function extendTime($book_id){
+    public function extendTime($book_id)
+    {
         $user_id = auth()->user()->id;
         $bookUser = BookUser::where('user_id', $user_id)->where('book_id', $book_id)->latest()->first();
         // dd($bookUser->extend_request);
-        if($bookUser->extend_request != 1){
-        BookUser::where('user_id', $user_id)->where('book_id', $book_id)->update(['extend_request' => '1']);
-            Redis::del(Redis::keys("UserBooks*"));
+        if ($bookUser->extend_request != 1) {
+            BookUser::where('user_id', $user_id)->where('book_id', $book_id)->update(['extend_request' => '1']);
+            try {
+                Redis::del(Redis::keys("UserBooks*"));
+            } catch (\Throwable $th) {
+            }
             return back()->with('success', 'Сунгах хүсэлт амжилттай илгээгдлээ!');
         } else {
-            Redis::del(Redis::keys("UserBooks*"));
+            try {
+                Redis::del(Redis::keys("UserBooks*"));
+            } catch (\Throwable $th) {
+            }
             return back()->with('warning', 'Сунгах хүсэлт илгээгдсэн байна.');
         }
     }
@@ -49,15 +56,14 @@ class UserBookController extends Controller
             $bookUser->user = User::where("id", "=", $bookUser->user_id)->first();
         }
 
-            $page = $request->has('page') ? $request->query('page') : 1;
-            if (Redis::get('UserBooks' . $page) == null) {
-                Redis::set('UserBooks' . $page, serialize($bookUsers));
-                return view('librarian.index', ['books' => $bookUsers]);
-            } else {
-                $bookUsers = unserialize(Redis::get('UserBooks' . $page));
-                return view('librarian.index', ['books' => $bookUsers]);
-            }
-
+        $page = $request->has('page') ? $request->query('page') : 1;
+        if (Redis::get('UserBooks' . $page) == null) {
+            Redis::set('UserBooks' . $page, serialize($bookUsers));
+            return view('librarian.index', ['books' => $bookUsers]);
+        } else {
+            $bookUsers = unserialize(Redis::get('UserBooks' . $page));
+            return view('librarian.index', ['books' => $bookUsers]);
+        }
     }
 
     public function bookStateChange(Request $request)
@@ -80,7 +86,10 @@ class UserBookController extends Controller
             $bookUser->expire_at = $now->addDays(7);
             $bookUser->save();
         });
-        Redis::del(Redis::keys("UserBooks*"));
+        try {
+            Redis::del(Redis::keys("UserBooks*"));
+        } catch (\Throwable $th) {
+        }
         return back()->with("success", "Амжилттай");
     }
 
@@ -94,7 +103,10 @@ class UserBookController extends Controller
         $user = User::findOrFail($bookUser->user_id);
         $book = Book::findOrFail($bookUser->book_id);
         $user->notify(new TestPushNotification($user->id, $book->title));
-        Redis::del(Redis::keys("UserBooks*"));
+        try {
+            Redis::del(Redis::keys("UserBooks*"));
+        } catch (\Throwable $th) {
+        }
         return back()->with("success", "Амжилттай");
     }
 
@@ -121,7 +133,10 @@ class UserBookController extends Controller
         if ($userBook == null) {
             return back()->with("warning", "Захиалга хийх үед алдаа гарлаа");
         }
-        Redis::del(Redis::keys("UserBooks*"));
+        try {
+            Redis::del(Redis::keys("UserBooks*"));
+        } catch (\Throwable $th) {
+        }
         return back()->with("success", "Захиалга амжилттай хийгдлээ. Та номын сан дээр очиж номоо хүлээж авна уу.");
     }
 }

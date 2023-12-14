@@ -113,10 +113,10 @@ if (auth()->user() != null) {
                 @endif
                 <li class="flex items-center p-2">
                     <div class="flex gap-2 items-center divide-x-0  ">
-                        <span class="font-bold ">
-                            
-                            <i class="fa-solid fa-wallet"></i>  {{ auth()->user()->balance }}
-                            
+                        <span class="font-bold border-x-2 border-gray-300 px-4 py-2">
+
+                            <i class="fa-solid fa-wallet"></i> {{ auth()->user()->balance }}
+
                         </span>
 
                         <span class="font-bold ml-2">
